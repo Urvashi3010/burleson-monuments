@@ -39,7 +39,7 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/burleson-monuments">
       <ScrollToTop />
       <Navbar />
 
