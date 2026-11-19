@@ -46,6 +46,10 @@ h3 {
   font-weight: 600;
 }
 
+main :is(h1, h2, h3, p, li) {
+  animation: float-gentle-up 6.2s ease-in-out infinite;
+}
+
 ::selection {
   background: rgba(219, 112, 147, 0.35);
   color: var(--color-charcoal);
@@ -63,23 +67,28 @@ textarea:focus-visible {
 /* Shared navigation */
 .navbar {
   position: sticky;
-  top: 0;
+  top: 12px;
   z-index: 1000;
   display: flex;
-  min-height: 82px;
+  width: calc(100% - 64px);
+  min-height: 68px;
+  margin: 12px auto 0;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  padding: 14px max(6%, calc((100% - 1280px) / 2));
-  border-bottom: 1px solid rgba(219, 112, 147, 0.35);
-  background: var(--color-charcoal);
-  box-shadow: 0 10px 30px rgba(36, 37, 36, 0.24);
+  padding: 10px 4%;
+  border: 1px solid rgba(219, 112, 147, 0.25);
+  border-radius: 18px;
+  /* background: var(--color-charcoal); */
+  background: rgba(20, 20, 20, 0.78);
+  box-shadow: 0 8px 28px rgba(36, 37, 36, 0.18);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .navbar-logo {
   flex: 0 0 auto;
-  color: var(--color-paper);
+  color: var(--color-champagne-gold);
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -91,14 +100,14 @@ textarea:focus-visible {
 .navbar-logo span {
   display: block;
   margin-top: 0.3rem;
-  color: var(--color-paper);
+  color: var(--color-pale-violet-red);
   font-size: 0.62rem;
   letter-spacing: 0.34em;
   text-align: center;
 }
 
 .navbar-logo:hover {
-  color: var(--color-paper);
+  color: var(--color-pale-violet-red);
   transform: translateY(-1px);
 }
 
@@ -225,6 +234,29 @@ textarea:focus-visible {
   animation: halo-drift 15s ease-in-out infinite alternate-reverse;
 }
 
+.hero-black-shimmer {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 54%, rgba(36, 37, 36, 0.16), transparent 45%),
+    linear-gradient(
+      112deg,
+      transparent 30%,
+      rgba(36, 37, 36, 0.12) 42%,
+      rgba(36, 37, 36, 0.38) 48%,
+      rgba(255, 253, 253, 0.72) 50%,
+      rgba(36, 37, 36, 0.24) 54%,
+      transparent 66%
+    );
+  background-size: 100% 100%, 220% 100%;
+  background-position: center, -140% 0;
+  mix-blend-mode: multiply;
+  opacity: 0.62;
+  animation: black-shimmer 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
 .hero-sparkles {
   position: absolute;
   z-index: 1;
@@ -263,6 +295,7 @@ textarea:focus-visible {
   color: var(--color-charcoal);
   font-size: 0.72rem;
   letter-spacing: 0.24em;
+  animation: float-gentle-left 5.8s ease-in-out 200ms infinite;
 }
 
 .hero-content h1 {
@@ -271,7 +304,9 @@ textarea:focus-visible {
   font-size: clamp(2.8rem, 6vw, 5rem);
   letter-spacing: -0.045em;
   line-height: 1.08;
-  animation: settle-in 900ms 100ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation:
+    settle-in 900ms 100ms cubic-bezier(0.2, 0.7, 0.2, 1) both,
+    float-heading 5s ease-in-out 800ms infinite;
 }
 
 .hero-content h1 span {
@@ -284,6 +319,7 @@ textarea:focus-visible {
   color: var(--color-muted);
   font-size: 1.02rem;
   line-height: 1.85;
+  animation: float-gentle-right 7s ease-in-out 300ms infinite;
 }
 
 .hero-buttons {
@@ -861,22 +897,43 @@ textarea:focus-visible {
   animation: ring-enter 900ms ease-out both;
 }
 
+.page-banner::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 18% 28%, rgba(219, 112, 147, 0.34) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 68% 22%, rgba(247, 231, 206, 0.78) 0 1.2px, transparent 2px),
+    radial-gradient(circle at 88% 72%, rgba(219, 112, 147, 0.24) 0 1px, transparent 1.8px);
+  opacity: 0.28;
+  content: "";
+  animation: sparkle-twinkle 7s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
 .page-banner h1 {
   position: relative;
+  z-index: 1;
   max-width: 800px;
   margin-bottom: 0.8rem;
   color: var(--color-charcoal);
   font-size: clamp(2.6rem, 6vw, 4.7rem);
   letter-spacing: -0.045em;
   line-height: 1.08;
-  animation: settle-in 650ms 80ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation:
+    settle-in 650ms 80ms cubic-bezier(0.2, 0.7, 0.2, 1) both,
+    float-heading 5s ease-in-out 700ms infinite;
 }
 
 .page-banner p {
   position: relative;
+  z-index: 1;
   max-width: 38rem;
   color: var(--color-muted);
   line-height: 1.8;
+  animation:
+    float-in-right 800ms 140ms cubic-bezier(0.2, 0.7, 0.2, 1) both,
+    float-gentle-right 7s ease-in-out 1s infinite;
 }
 
 .about-page-content {
@@ -1899,6 +1956,35 @@ button:not(:disabled):is(:hover, :focus-visible, :active),
   to { opacity: 0.42; }
 }
 
+@keyframes black-shimmer {
+  0% {
+    background-position: center, -140% 0;
+  }
+  100% {
+    background-position: center, 140% 0;
+  }
+}
+
+@keyframes float-heading {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -9px, 0); }
+}
+
+@keyframes float-gentle-up {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -6px, 0); }
+}
+
+@keyframes float-gentle-left {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-4px, -3px, 0); }
+}
+
+@keyframes float-gentle-right {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(4px, -3px, 0); }
+}
+
 @keyframes flower-sway {
   from { transform: rotate(-1.5deg); }
   to { transform: rotate(1.5deg); }
@@ -1930,10 +2016,10 @@ button:not(:disabled):is(:hover, :focus-visible, :active),
   to { opacity: 1; }
 }
 
-@keyframes text-rise {
+@keyframes float-in-right {
   from {
     opacity: 0;
-    translate: 0 24px;
+    translate: 18px 8px;
   }
   to {
     opacity: 1;
@@ -1991,15 +2077,70 @@ button:not(:disabled):is(:hover, :focus-visible, :active),
 
   .section-heading h2,
   .section-heading p,
+  .about-content > *,
+  .contact-info > *,
+  .about-page .about-content h2,
+  .about-page .about-content p,
+  .about-page .about-content li,
+  .contact-page > div h2,
+  .contact-page > div p,
+  .contact-page form h3,
+  .memorials-content > h2,
+  .memorials-content > p,
   .category-card h3,
   .category-card p,
   .testimonial-card h3,
   .testimonial-card p,
   .memorial-item h3,
-  .memorial-item p {
-    animation: text-rise linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 65%;
+  .memorial-item p,
+  .memorial-detail-content h2,
+  .memorial-detail-content h3,
+  .memorial-detail-content p,
+  .memorial-detail-content li,
+  .testimonials-content > h2,
+  .testimonials-content > p,
+  .testimonials-contact h2,
+  .testimonials-contact p,
+  .faq-section .section-heading h2,
+  .faq-section .section-heading p,
+  .faq-item button,
+  .faq-item p,
+  .faq-cta h2,
+  .faq-cta p,
+  .gallery-section > h2,
+  .related-memorials h2,
+  .related-memorials > p {
+    animation: float-gentle-up 6.2s ease-in-out infinite;
+  }
+
+  .about-page .about-content > div:nth-child(odd) h2,
+  .about-page .about-content > div:nth-child(odd) p,
+  .contact-page > div h2,
+  .contact-page > div p,
+  .faq-item button {
+    animation-name: float-gentle-left;
+  }
+
+  .testimonials-content > p,
+  .testimonials-contact h2,
+  .testimonials-contact p,
+  .memorial-detail-content li,
+  .related-memorials > p {
+    animation-name: float-gentle-right;
+  }
+
+  .category-card:nth-child(3) h3,
+  .category-card:nth-child(3) p,
+  .testimonial-card:nth-child(3) h3,
+  .testimonial-card:nth-child(3) p {
+    animation-name: float-gentle-left;
+  }
+
+  .category-card:nth-child(4) h3,
+  .category-card:nth-child(4) p,
+  .testimonial-card:nth-child(2) h3,
+  .testimonial-card:nth-child(2) p {
+    animation-name: float-gentle-right;
   }
 
   .hero ~ .categories .section-heading,
@@ -2065,9 +2206,12 @@ button:not(:disabled):is(:hover, :focus-visible, :active),
 
 @media (max-width: 768px) {
   .navbar {
-    min-height: 74px;
-    padding: 10px 5%;
-  }
+  width: calc(100% - 28px);
+  min-height: 64px;
+  margin: 10px auto 0;
+  padding: 8px 5%;
+  border-radius: 16px;
+}
 
   .menu-toggle {
     display: block;

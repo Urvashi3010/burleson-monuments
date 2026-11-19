@@ -6,6 +6,7 @@ function Home() {
     <main>
       <section className="hero">
         <div className="hero-overlay"></div>
+        <div className="hero-black-shimmer" aria-hidden="true"></div>
         <div className="hero-sparkles" aria-hidden="true"></div>
 
         <div className="hero-content">
