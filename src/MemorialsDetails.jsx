@@ -153,10 +153,10 @@ function MemorialsDetails() {
 
   
   const imagePrefixes = {
-    'companion-markers-bronze': 'companion-marker-bronze',
-    'double-interment-markers': 'double-interment-marker',
-    'child-memorials': 'child-memorial',
-    'cremation-memorials': 'cremation-memorial',
+    'companion-markers-bronze': 'companion-markers-bronze',
+    'double-interment-markers': 'double-interment-markers',
+    'child-memorials': 'child-memorials',
+    'cremation-memorials': 'cremation-memorials',
   };
 
   const imagePrefix = imagePrefixes[category] || category;
@@ -444,14 +444,23 @@ function MemorialsDetails() {
             src={categoryImages[index]}
             alt={name || 'Decorative flower'}
             onError={(e) => {
-              const img = e.currentTarget;
-              if (!img.dataset.pngAttempted) {
-                img.dataset.pngAttempted = 'true';
-                img.src = img.src.replace('.jpg', '.png');
-              } else {
-                img.style.display = 'none';
-              }
-            }}
+  const img = e.currentTarget;
+
+  const extensions = ['jpg', 'png', 'jpeg', 'webp'];
+  const currentIndex = Number(img.dataset.extensionIndex || 0);
+  const nextIndex = currentIndex + 1;
+
+        if (nextIndex < extensions.length) {
+          img.dataset.extensionIndex = nextIndex;
+
+          const imageNumber = String(index + 1).padStart(2, '0');
+
+          img.src =
+            `${import.meta.env.BASE_URL}images/memorials/${category}/${imagePrefix}-${imageNumber}.${extensions[nextIndex]}`;
+        } else {
+          img.closest('.memorial-gallery-image').style.display = 'none';
+        }
+      }}
           />
           {name && <h3>{name}</h3>}
         </div>
