@@ -31,10 +31,10 @@ export function WordReveal({ text }) {
             key={`${word}-${index}`}
             initial={reducedMotion ? false : { opacity: 0, y: 12 }}
             whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.65 }}
+            viewport={{ once: false, amount: 0.1 }}
             transition={{
               duration: reducedMotion ? 0 : 0.48,
-              delay: reducedMotion ? 0 : index * 0.075,
+              delay: reducedMotion ? 0 : index * 0.09,
               ease: [0.22, 1, 0.36, 1],
             }}
           >
@@ -267,7 +267,7 @@ export function PageMotion({ children, locationKey }) {
     if (!root || reducedMotion || !('IntersectionObserver' in window)) return undefined;
 
     const targets = root.querySelectorAll([
-      'main section:not(.hero)',
+      'main section:not(.hero):not(.gallery-section)',
       'main h1',
       'main h2',
       'main h3',
@@ -294,11 +294,12 @@ export function PageMotion({ children, locationKey }) {
 
     targets.forEach((target) => {
       if (
-        target.hasAttribute('data-framer-reveal')
-        || target.closest('.hero')
-      ) {
-        return;
-      }
+  target.hasAttribute('data-framer-reveal')
+  || target.closest('.hero')
+  || target.closest('.about-legacy-section')
+) {
+  return;
+}
       target.dataset.motion = 'pending';
       observer.observe(target);
     });

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 :root {
   --color-charcoal: #242524;
   --color-pale-violet-red: #db7093;
@@ -496,7 +497,7 @@ main :is(.memorial-item, .gallery-item, .related-memorial-card, .faq-item):nth-c
 .about,
 .testimonials,
 .contact {
-  padding: clamp(4rem, 8vw, 7rem) max(7%, calc((100% - 1280px) / 2));
+  padding: clamp(4rem, 7vw, 6rem) max(3%, calc((100% - 1500px) / 2));
 }
 
 .categories {
@@ -637,6 +638,49 @@ main :is(.memorial-item, .gallery-item, .related-memorial-card, .faq-item):nth-c
   border-color: var(--color-pale-violet-red);
   background: var(--color-pale-violet-red);
   box-shadow: 0 0 18px rgba(247, 231, 206, 0.65);
+}
+
+/* Homepage Memorial Categories */
+.category-showcase {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.category-feature {
+  min-width: 0;
+  text-align: center;
+}
+
+.category-feature img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 1.2rem;
+  transition: transform 400ms ease;
+}
+
+.category-feature:hover img {
+  transform: scale(1.035);
+}
+
+.category-feature h3 {
+  margin: 0.8rem 0;
+  color: var(--color-ink);
+  font-size: 1.35rem;
+}
+
+.category-feature p {
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.category-feature .category-card-details {
+  margin: 1rem auto;
 }
 
 .about {
@@ -1093,10 +1137,10 @@ main :is(.memorial-item, .gallery-item, .related-memorial-card, .faq-item):nth-c
 
 .about-page .about-content > div {
   padding: clamp(1.4rem, 3vw, 2.2rem);
-  border: 1px solid var(--color-border);
-  border-radius: 0.9rem 0.9rem 2.6rem 0.9rem;
-  background: var(--color-surface);
-  box-shadow: 0 8px 26px rgba(36, 37, 36, 0.06);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .about-page .about-content > div:first-child,
@@ -1434,13 +1478,17 @@ main :is(.memorial-item, .gallery-item, .related-memorial-card, .faq-item):nth-c
 }
 
 .memorial-item {
-  overflow: hidden;
-  padding: 0 0 1.25rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.8rem;
-  background: var(--color-surface);
-  box-shadow: 0 8px 26px rgba(36, 37, 36, 0.06);
-  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0;
+  overflow: visible;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: center;
+  transition: none;
 }
 
 .memorial-item img {
@@ -1552,7 +1600,7 @@ main :is(.memorial-item, .gallery-item, .related-memorial-card, .faq-item):nth-c
   font: inherit;
   box-shadow: 0 8px 22px rgba(36, 37, 36, 0.09);
   text-align: left;
-  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+transition: background 180ms ease, transform 180ms ease, border-color 180ms ease;
 }
 
 .gallery-item:hover,
@@ -1573,7 +1621,10 @@ main :is(.memorial-item, .gallery-item, .related-memorial-card, .faq-item):nth-c
 }
 
 .gallery-item img {
+  display: block;
+  width: 100%;
   height: 100%;
+  object-fit: contain;
   object-position: center;
 }
 
@@ -2380,4 +2431,810 @@ button:not(:disabled):is(:hover, :focus-visible, :active),
   color: #000000 !important;
   text-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
   background: transparent !important;
+}
+
+/* 3D Fan Card Carousel */
+
+.about-visual {
+  perspective: 1200px;
+}
+
+.fan-carousel {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 340px;
+  place-items: center;
+  perspective: 1200px;
+}
+
+.fan-card {
+  position: absolute;
+  width: min(58%, 18rem);
+  height: 270px;
+  padding: 3px;
+  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    #f7c9d8,
+    #fff0d5,
+    #dba1bb,
+    #fff0d5,
+    #f7c9d8
+  );
+  background-size: 300% 300%;
+  animation: neon-card-glow 5s ease infinite;
+box-shadow:
+  0 12px 22px rgba(36, 37, 36, 0.25),
+  0 0 15px rgba(219, 112, 147, 0.55),
+  0 0 30px rgba(219, 112, 147, 0.4),
+  0 0 50px rgba(247, 201, 216, 0.45);
+  transform-style: preserve-3d;
+}
+
+.fan-card-inner {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #fff;
+}
+
+.fan-card-inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fan-card-inner span {
+  display: grid;
+  flex: 1;
+  place-items: center;
+  padding: 5px;
+  color: var(--color-charcoal);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+@keyframes neon-card-glow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Tablet and mobile */
+@media (max-width: 768px) {
+  .fan-carousel {
+    height: 310px;
+  }
+
+  .fan-card {
+    width: min(62%, 17rem);
+    height: 245px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fan-carousel {
+    height: 290px;
+  }
+
+  .fan-card {
+    width: 65%;
+    height: 225px;
+  }
+}
+
+/* Remove outer boxes from Home About section */
+.about-visual,
+.about-content {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Remove extra decorative container effects */
+.about-visual::before,
+.about-visual::after,
+.about-content::before,
+.about-content::after {
+  display: none !important;
+}
+
+/* About page scroll-writing effect */
+.about-page .about-text-section {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.about-page .word-reveal__word {
+  display: inline-block;
+}
+
+.about-page .about-text-section h2 {
+  margin-bottom: 1rem;
+}
+
+.about-page .about-text-section p,
+.about-page .about-text-section li {
+  line-height: 1.9;
+}
+
+.about-page .about-text-section {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 1.5rem 0;
+}
+
+/* Premium Legacy Section Animation */
+
+.about-page .about-legacy-section {
+  position: relative;
+  overflow: hidden;
+  padding: 3rem 2rem !important;
+}
+
+.legacy-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  line-height: 1.2;
+  font-weight: 600;
+  perspective: 700px;
+  margin-bottom: 1.5rem;
+}
+
+.legacy-heading-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.18em;
+  overflow: visible;
+  padding-bottom: 5px;
+}
+
+.legacy-heading-word {
+  display: inline-block;
+  transform-origin: bottom;
+  will-change: transform, opacity;
+}
+
+.legacy-heading-word {
+  display: inline-block;
+  transform-origin: bottom;
+}
+
+.legacy-gold-line {
+  width: 110px;
+  height: 4px;
+  background: #b99a61;
+  border-radius: 10px;
+  transform-origin: left;
+  margin: 1.5rem 0 2rem;
+}
+
+.about-legacy-section p {
+  max-width: 850px;
+  font-size: 1.05rem;
+  line-height: 2;
+  margin-bottom: 1.2rem;
+}
+
+@media (max-width: 600px) {
+  .about-page .about-legacy-section {
+    padding: 2rem 1rem !important;
+  }
+
+  .legacy-heading {
+    font-size: 2.2rem;
+  }
+}
+
+/* Restore Home page section heading sizes */
+
+.categories .section-heading h2,
+.testimonials .section-heading h2 {
+  font-size: clamp(1.5rem, 1vw, 2rem) !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  letter-spacing: -1px;
+}
+
+/* Keep animated words at the same heading size */
+.categories .section-heading h2 .word-reveal,
+.testimonials .section-heading h2 .word-reveal,
+.categories .section-heading h2 .word-reveal__word,
+.testimonials .section-heading h2 .word-reveal__word {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .categories .section-heading h2,
+  .testimonials .section-heading h2 {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .categories .section-heading h2,
+  .testimonials .section-heading h2 {
+    font-size: 1.2rem !important;
+  }
+}
+
+.categories .section-heading h2,
+.testimonials .section-heading h2,
+.categories .section-heading h2 .word-reveal__word,
+.testimonials .section-heading h2 .word-reveal__word {
+  letter-spacing: -0.8px !important;
+}
+
+.categories .section-heading h2,
+.testimonials .section-heading h2,
+.categories .section-heading h2 .word-reveal__word,
+.testimonials .section-heading h2 .word-reveal__word {
+  font-family: 'Courgette', cursive !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
+
+/* Mobile dropdown glass effect on scroll */
+@media (max-width: 768px) {
+  .navbar.scrolled .nav-links.active {
+    background: rgba(20, 20, 20, 0.12) !important;
+
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    box-shadow:
+      0 0 8px rgba(255, 255, 255, 0.12),
+      0 0 18px rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Mobile navbar text alignment and scroll styling */
+@media (max-width: 768px) {
+
+  /* Align menu text to the right */
+  .nav-links {
+    align-items: flex-end !important;
+    text-align: center;
+  }
+
+  .nav-links a {
+    width: 100%;
+    font-weight: 500;
+  }
+
+  /* Remove pink underline in mobile menu */
+  .nav-links a::after {
+    display: none !important;
+  }
+
+  /* When navbar gets its glass background */
+  .navbar.scrolled .nav-links.active a {
+    color: #242524 !important;
+    font-weight: 700 !important;
+    text-shadow: none !important;
+  }
+
+  /* Keep glass effect on dropdown */
+  .navbar.scrolled .nav-links.active {
+    background: rgba(20, 20, 20, 0.12) !important;
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 0 0 16px 16px;
+  }
+}
+
+/* Natural Memorial Image Gallery */
+
+.related-memorial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+  align-items: center;
+  position: relative;
+}
+
+.memorial-gallery-image {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  position: relative;
+}
+
+.memorial-gallery-image img {
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.memorial-gallery-image:hover {
+  transform: scale(1.06);
+  z-index: 2;
+}
+
+/* Blur other images when one is selected */
+
+.related-memorial-grid.image-selected .memorial-gallery-image:not(.active-image) {
+  filter: blur(5px);
+  opacity: 0.45;
+}
+
+.memorial-gallery-image.active-image {
+  position: relative;
+  z-index: 10;
+  transform: scale(1.35);
+}
+
+.memorial-gallery-image.active-image img {
+  max-height: 65vh;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .related-memorial-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .memorial-gallery-image.active-image {
+    transform: scale(1.15);
+  }
+}
+
+@media (max-width: 480px) {
+  .related-memorial-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bronze-plaques-gallery .memorial-gallery-image img {
+  max-height: 680px;
+}
+
+.related-memorial-grid.bronze-plaques-gallery {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Bronze Plaques - First Image */
+
+.related-memorial-grid.bronze-plaques-gallery
+.memorial-gallery-image:first-child {
+  grid-column: 1 / -1 !important;
+  justify-self: center !important;
+  width: 650px !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.related-memorial-grid.bronze-plaques-gallery
+.memorial-gallery-image:first-child img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+}
+
+/* FLOWER VASES PAGE */
+
+.flower-vases-page {
+  max-width: 1050px;
+  margin: 40px auto;
+  padding: 25px;
+}
+
+.vase-section {
+  margin-bottom: 65px;
+}
+
+.vase-section h2 {
+  text-align: center;
+  font-family: Georgia, serif;
+  font-size: 27px;
+  margin-bottom: 10px;
+}
+
+.vase-subtitle {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 35px;
+}
+
+.vase-shapes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.vase-shapes img {
+  width: 100%;
+  height: 210px;
+  object-fit: contain;
+}
+
+.vase-shapes h3 {
+  font-size: 22px;
+}
+
+.granite-colors {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  text-align: center;
+}
+
+.vase-color-item img {
+  width: 100%;
+  max-width: 210px;
+  height: 125px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.vase-color-item img:hover {
+  transform: scale(1.12);
+}
+
+.vase-color-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.vase-color-item h4 {
+  font-family: Georgia, serif;
+  width: 100%;
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+.vase-color-item img {
+  display: block;
+  margin: 0 auto;
+}
+
+.bronze-vase-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  align-items: center;
+  margin-top: 35px;
+}
+
+.bronze-vase-layout > img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+.bronze-vase-options {
+  text-align: center;
+}
+
+.bronze-vase-options p {
+  text-align: left;
+  font-weight: 600;
+}
+
+.bronze-vase-options img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  margin-top: 15px;
+}
+
+.metalcraft-vases {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  text-align: center;
+  margin-top: 35px;
+}
+
+.metalcraft-item img {
+  width: 100%;
+  height: 270px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.metalcraft-item img:hover {
+  transform: scale(1.12);
+}
+
+.metalcraft-item h4 {
+  font-family: Georgia, serif;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .vase-shapes,
+  .bronze-vase-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .granite-colors {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .metalcraft-vases {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .granite-colors {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* INSCRIPTIONS PAGE */
+
+.inscriptions-page {
+  max-width: 1050px;
+  margin: 35px auto;
+  padding: 25px;
+  background: #fff;
+  color: #222;
+  font-family: Georgia, serif;
+}
+
+.inscriptions-page > h2 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+.inscriptions-intro {
+  max-width: 850px;
+  margin: 0 auto 25px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.inscriptions-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+}
+
+.inscriptions-columns ol {
+  margin: 0;
+  padding-left: 35px;
+}
+
+.inscriptions-columns li {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.9;
+  padding-left: 3px;
+}
+
+.inscriptions-decoration {
+  display: block;
+  width: 230px;
+  height: auto;
+  object-fit: contain;
+  margin: 25px auto 0;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+  .inscriptions-columns {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .inscriptions-page > h2 {
+    font-size: 24px;
+  }
+
+  .inscriptions-columns li {
+    font-size: 14px;
+  }
+}
+
+.inscriptions-intro {
+  color: rgba(130, 44, 73, 0.56) ;
+}
+ 
+.memorial-photos-page {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.memorial-photos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 30px;
+}
+
+.memorial-photo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.memorial-photo-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.memorial-photo-item img:hover {
+  transform: scale(1.08);
+}
+
+.memorial-photo-item h3 {
+  text-align: center;
+  margin-top: 15px;
+  font-family: Georgia, serif;
+}
+
+@media (max-width: 768px) {
+  .memorial-photos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Complete Gallery Layout */
+
+.gallery-section {
+  padding: 60px 6%;
+  background: var(--color-paper);
+}
+
+.gallery-section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 25px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.gallery-item,
+.gallery-item:nth-child(n) {
+  grid-column: auto;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  box-shadow: 0 5px 18px rgba(41, 40, 39, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(41, 40, 39, 0.15);
+}
+
+@media (max-width: 1000px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Memorials Page - Category Images */
+.memorials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+.memorial-item img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  transition: transform 400ms ease;
+}
+
+.memorial-item:hover img {
+  transform: scale(1.035);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .memorials-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .memorials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .memorial-item img {
+    height: 280px;
+  }
+}
+
+.memorial-image-link {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+.memorial-item h3 {
+  margin: 1rem 0 0.5rem;
+}
+
+.memorial-item p {
+  margin: 0.5rem 0;
 }

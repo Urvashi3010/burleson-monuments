@@ -2,11 +2,12 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import {
   MotionLink,
-  Parallax,
   ParticleField,
   Reveal,
   WordReveal,
 } from '../components/Motion';
+
+import FanCardCarousel from '../components/FanCardCarousel';
 
 function Home() {
   return (
@@ -49,6 +50,7 @@ function Home() {
         </div>
       </section>
       {/* Memorial Categories */}
+{/* Memorial Categories */}
 <section className="categories">
   <div className="section-heading">
     <span>OUR COLLECTION</span>
@@ -56,74 +58,63 @@ function Home() {
     <p>Thoughtfully crafted memorials to honor a life and preserve memories.</p>
   </div>
 
-  <Reveal className="category-card" delay={0}>
-  <Link to="/memorials/single-monuments">
-    <div className="category-image">
-      <img src="/images/image_029f3854ea.png" alt="Upright Monuments" />
-    </div>
-    <h3>Upright Monuments</h3>
-  </Link>
-  <p>Beautifully crafted monuments to honor loved ones.</p>
-  <MotionLink className="category-card-details" to="/memorials/single-monuments">
-    Explore Details <ArrowRight size={15} />
-  </MotionLink>
-</Reveal>
+  <div className="category-showcase">
 
-  <Reveal className="category-card" delay={0.08}>
-  <Link to="/memorials/single-markers-granite">
-    <div className="category-image">
-      <img src="/images/image_0741e3eea9.jpg" alt="Memorial Markers" />
-    </div>
-    <h3>Memorial Markers</h3>
-  </Link>
-  <p>Elegant designs created to preserve precious memories.</p>
-  <MotionLink className="category-card-details" to="/memorials/single-markers-granite">
-    Explore Details <ArrowRight size={15} />
-  </MotionLink>
-</Reveal>
+    <Reveal className="category-feature" delay={0}>
+      <Link to="/memorials/single-monuments">
+        <img
+          src={`${import.meta.env.BASE_URL}images/memorials/single-monuments/single-monuments-16.jpg`}
+          alt="Upright Monuments"
+        />
+        <h3>Upright Monuments</h3>
+      </Link>
+      <p>Beautifully crafted monuments to honor loved ones.</p>
+      <MotionLink className="category-card-details" to="/memorials/single-monuments">
+        Explore Details <ArrowRight size={15} />
+      </MotionLink>
+    </Reveal>
 
-   <Reveal className="category-card" delay={0.16}>
-  <Link to="/memorials/premium-monuments">
-    <div className="category-image">
-      <img src="/images/image_1221872f9f.jpg" alt="Custom Memorials" />
-    </div>
-    <h3>Custom Memorials</h3>
-  </Link>
-  <p>Personalized memorials designed with care and respect.</p>
-  <MotionLink className="category-card-details" to="/memorials/premium-monuments">
-    Explore Details <ArrowRight size={15} />
-  </MotionLink>
-</Reveal>
+    <Reveal className="category-feature" delay={0.08}>
+      <Link to="/memorials/single-markers-granite">
+        <img
+          src={`${import.meta.env.BASE_URL}images/memorials/single-markers-granite/single-markers-granite-21.jpg`}
+          alt="Memorial Markers"
+        />
+        <h3>Memorial Markers</h3>
+      </Link>
+      <p>Elegant designs created to preserve precious memories.</p>
+      <MotionLink className="category-card-details" to="/memorials/single-markers-granite">
+        Explore Details <ArrowRight size={15} />
+      </MotionLink>
+    </Reveal>
+
+    <Reveal className="category-feature" delay={0.16}>
+      <Link to="/memorials/premium-monuments">
+        <img
+          src={`${import.meta.env.BASE_URL}images/memorials/premium-monuments/premium-monuments-03.jpg`}
+          alt="Custom Memorials"
+        />
+        <h3>Custom Memorials</h3>
+      </Link>
+      <p>Personalized memorials designed with care and respect.</p>
+      <MotionLink className="category-card-details" to="/memorials/premium-monuments">
+        Explore Details <ArrowRight size={15} />
+      </MotionLink>
+    </Reveal>
+
+  </div>
 </section>
 
 {/* About Section */}
 <section className="about">
-  <Reveal className="about-visual" role="img" aria-label="A soft illustration of a flowering plant in a pot">
-    <Parallax>
-      <svg className="about-flower" viewBox="0 0 320 320" aria-hidden="true" focusable="false">
-      <circle className="about-flower-halo" cx="160" cy="148" r="112" />
-      <path className="about-flower-stem" d="M160 216c0-36-1-68 0-108" />
-      <path className="about-flower-stem" d="M160 180c-16-5-27-16-31-31m31 10c17-6 28-17 31-33" />
-      <path className="about-flower-leaf" d="M157 176c-20-4-31-15-32-28 17 1 29 10 34 25m3-18c19-5 30-16 31-29-17 2-28 11-33 26" />
-      <g className="about-flower-bloom" transform="translate(160 91)">
-        <ellipse cx="0" cy="-16" rx="9" ry="16" />
-        <ellipse cx="0" cy="-16" rx="9" ry="16" transform="rotate(60)" />
-        <ellipse cx="0" cy="-16" rx="9" ry="16" transform="rotate(120)" />
-        <ellipse cx="0" cy="-16" rx="9" ry="16" transform="rotate(180)" />
-        <ellipse cx="0" cy="-16" rx="9" ry="16" transform="rotate(240)" />
-        <ellipse cx="0" cy="-16" rx="9" ry="16" transform="rotate(300)" />
-        <circle className="about-flower-center" r="8" />
-      </g>
-      <path className="about-flower-pot" d="M113 220h94l-10 69h-74z" />
-      <path className="about-flower-pot-rim" d="M103 211h114v14H103z" />
-      <path className="about-flower-pot-detail" d="M137 239h46m-43 12h40" />
-      </svg>
-    </Parallax>
-    <div className="about-visual-caption" aria-hidden="true">
-      <span>QUALITY CRAFTSMANSHIP</span>
-      <span>BUILT TO LAST</span>
-    </div>
-  </Reveal>
+  <Reveal className="about-visual">
+  <FanCardCarousel />
+
+  <div className="about-visual-caption" aria-hidden="true">
+    <span>QUALITY CRAFTSMANSHIP</span>
+    <span>BUILT TO LAST</span>
+  </div>
+</Reveal>
 
   <Reveal className="about-content" delay={0.1}>
     <span>ABOUT BURLESON MONUMENTS</span>
@@ -185,17 +176,17 @@ function Home() {
 
     <div className="contact-detail">
       <h4>Visit Us</h4>
-      <p>Burleson Monuments</p>
+      <p>www.burlesonmonuments.com</p>
     </div>
 
     <div className="contact-detail">
       <h4>Phone</h4>
-      <p>Contact us for assistance</p>
+      <p>817-295-2662</p>
     </div>
 
     <div className="contact-detail">
       <h4>Email</h4>
-      <p>Send us your inquiry</p>
+      <p>info@burlesonmonuments.com</p>
     </div>
   </div>
 

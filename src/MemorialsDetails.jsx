@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
+import { useState } from 'react';
 import MemorialSidebar from './components/MemorialSidebar';
 import { MotionLink } from './components/Motion';
 import galleryImages from './galleryImages';
@@ -146,9 +147,25 @@ const memorialData = {
 };
 
 function MemorialsDetails() {
+  const [selectedImage, setSelectedImage] = useState(null);
   const { category } = useParams();
   const memorial = memorialData[category];
 
+  
+  const imagePrefixes = {
+    'companion-markers-bronze': 'companion-marker-bronze',
+    'double-interment-markers': 'double-interment-marker',
+    'child-memorials': 'child-memorial',
+    'cremation-memorials': 'cremation-memorial',
+  };
+
+  const imagePrefix = imagePrefixes[category] || category;
+
+  const categoryImages = Array.from({ length: 30 }, (_, index) => {
+  const imageNumber = String(index + 1).padStart(2, '0');
+
+  return `${import.meta.env.BASE_URL}images/memorials/${category}/${imagePrefix}-${imageNumber}.jpg`;
+});
   if (!memorial) {
   return (
     <main>
@@ -202,28 +219,293 @@ function MemorialsDetails() {
          </div>
         </section>
 
-            <section className="related-memorials">
+ {category === 'flower-vases' ? (
+
+  <section className="flower-vases-page">
+
+    {/* GRANITE FLOWER VASES */}
+
+    <div className="vase-section">
+      <h2>1) Granite Flower Vases</h2>
+      <p className="vase-subtitle">
+        (2 shape options including Tapered and Turned)
+      </p>
+
+      <div className="vase-shapes">
+        <div>
+          <img src={`${import.meta.env.BASE_URL}images/memorials/flower-vases/flower-vases-01.jpg`} alt="Tapered Granite Vase" />
+        </div>
+
+        <div>
+          <img src={`${import.meta.env.BASE_URL}images/memorials/flower-vases/flower-vases-02.jpg`} alt="Turned Granite Vase" />
+        </div>
+      </div>
+
+      <div className="granite-colors">
+        {[
+          'Georgia Gray',
+          'Bahama Blue',
+          'Sunset Red',
+          'Jet Black',
+          'Indian Red',
+          'Salisbury Pink',
+          'Flash Black',
+          'Mahogany',
+          'Morning Rose',
+        ].map((name, index) => (
+          <div className="vase-color-item" key={name}>
+            <h4>{name}</h4>
+            <img
+              src={`${import.meta.env.BASE_URL}images/memorials/flower-vases/flower-vases-${String(index + 3).padStart(2, '0')}.jpg`}
+              alt={name}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+
+    {/* BRONZE FLOWER VASES */}
+
+    <div className="vase-section">
+      <h2>2) Bronze Flower Vases</h2>
+
+      <div className="bronze-vase-layout">
+        <img
+          src={`${import.meta.env.BASE_URL}images/memorials/flower-vases/flower-vases-13.jpg`}
+          alt="Bronze Flower Vases"
+        />
+
+        <div className="bronze-vase-options">
+          <h4>4 Bronze Options Include:</h4>
+          <p>• Signature &nbsp;&nbsp; • Regency</p>
+          <p>• Garden &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • Patrician</p>
+
+          <img
+            src={`${import.meta.env.BASE_URL}images/memorials/flower-vases/flower-vases-14.jpg`}
+            alt="Bronze Flower Vase with Flowers"
+          />
+        </div>
+      </div>
+    </div>
+
+
+    {/* METALCRAFT FLOWER VASES */}
+
+    <div className="vase-section">
+      <h2>3) MetalCraft Flower Vases</h2>
+
+      <div className="metalcraft-vases">
+
+        {[
+          { name: 'Monarch', image: 15 },
+          { name: 'Classic', image: 16 },
+          { name: 'Crown', image: 17 },
+          { name: 'Regal', image: 18 }
+        ].map((item) => (
+          <div className="metalcraft-item" key={item.name}>
+            <h4>{item.name}</h4>
+
+            <img
+              src={`${import.meta.env.BASE_URL}images/memorials/flower-vases/flower-vases-${item.image}.jpg`}
+              alt={item.name}
+            />
+          </div>
+        ))}
+
+      </div>
+    </div>
+
+  </section>
+
+) : category === 'inscriptions' ? (
+
+  <section className="inscriptions-page">
+
+    <h2>Memorial Verses – Epitaphs</h2>
+
+    <p className="inscriptions-intro">
+      Burleson Monuments offers Inscriptions on our Markers, Monuments,
+      Cremation Memorials and Memorial Benches. Below you will find our
+      many options at which we hope will be helpful in personalizing
+      a forever detail.
+    </p>
+
+    {(() => {
+      const verses = [
+        'At Rest',
+        'In Gods Care',
+        'In Heaven',
+        'Gone Home',
+        'In Loving Memory',
+        'In Loving Memory of',
+        'Together Forever',
+        'We Miss You',
+        'We Love You',
+        'Forever Missed',
+        'Forever Loved',
+        'Faithful Forever',
+        'A Loving Companion',
+        'Forever In Our Hearts',
+        'Our Little Angel',
+        'Eternal Love',
+        'Our Love is Eternal',
+        'Rest In Peace',
+        'One Of A Kind',
+        'In Memoriam',
+        'In Remembrance',
+        'Precious Memories',
+        'Sweet Memories',
+        "We'll be Together Again",
+        'We Will Meet Again',
+        'Devoted In Love',
+        'Until We Meet Again',
+        'Always In Our Hearts',
+        'An Unforgettable Person',
+        'A Friend In Deed',
+        'A Special Kind Of Love',
+        'Gone But Not Forgotten',
+        'A Sharing Caring Person',
+        'Life if Not Forever, Love Is',
+        'A Loving Companion',
+        'The Best Is Yet To Come',
+        'Because He (She) Cared',
+        'Brave In Spirit, Strong in Love',
+        "Everybody's Best Friend",
+        'Faith Hope And Courage',
+        'Your Light Will Shine Forever',
+        'My LifeTime Companion',
+        'He (She) Inspired Us All',
+        'Strong in Love, Brave in Spirit',
+        'An Inspiration to all of Us',
+        'Darling, We Miss You',
+        'A Love True and Constant',
+        'A Loving Husband / Wife / Father / Mother',
+        'A Woman (Man) of Grace and Dignity',
+        'Always a Gentleman (Lady)',
+        'He (She) Ask For So Little, But Gave So Much',
+        'Consistent Of Faith, Generous By Heart',
+        'He (She) Enriched Our Lives',
+        'He(She) Lived To Help Others',
+        'He(She)Touched The Lives Of Many',
+        'He (She) Will Never Be Forgotten',
+        'In One of the Stars I shall Be Living',
+        'Love Is A Light That Never Dims',
+        'May His (Her) Light Guide You',
+        'Morn Not My Death, But Celebrate My Life',
+        'We Remember How Much You Loved Us',
+        'What We Keep in Memory Is Ours Forever',
+        'Wonderful Was Your Love For Us',
+        'In Heaven Too, Will Have Our Hand'
+      ];
+
+      return (
+        <>
+          <div className="inscriptions-columns">
+
+            <ol>
+              {verses.slice(0, 35).map((verse, index) => (
+                <li key={index}>{verse}</li>
+              ))}
+            </ol>
+
+            <ol start="36">
+              {verses.slice(35).map((verse, index) => (
+                <li key={index}>{verse}</li>
+              ))}
+            </ol>
+
+          </div>
+
+          <img
+            className="inscriptions-decoration"
+            src={categoryImages[0]}
+            alt="Memorial flower arrangement"
+          />
+        </>
+      );
+    })()}
+
+  </section>
+
+) : category === 'memorial-photos' ? (
+  <section className="memorial-photos-page">
+    <div className="memorial-photos-grid">
+      {[
+        'Oval',
+        'Round',
+        'Heart',
+        'Rectangle',
+        'Dome',
+        ''
+      ].map((name, index) => (
+        <div className="memorial-photo-item" key={index}>
+          <img
+            src={categoryImages[index]}
+            alt={name || 'Decorative flower'}
+            onError={(e) => {
+              const img = e.currentTarget;
+              if (!img.dataset.pngAttempted) {
+                img.dataset.pngAttempted = 'true';
+                img.src = img.src.replace('.jpg', '.png');
+              } else {
+                img.style.display = 'none';
+              }
+            }}
+          />
+          {name && <h3>{name}</h3>}
+        </div>
+      ))}
+    </div>
+  </section>
+) : (
+  <section className="related-memorials">
+
     <h2>Explore Our Memorial Designs</h2>
 
     <p>
-        Browse our collection of memorial designs and find inspiration
-        for a meaningful tribute.
+      Browse our collection of memorial designs and find inspiration
+      for a meaningful tribute.
     </p>
 
-  <div className="related-memorial-grid">
-    {galleryImages.slice(0, 6).map((image, index) => (
-      <div className="related-memorial-card" key={index}>
-        <img
-          src={image}
-          alt={`Memorial design ${index + 1}`}
-          loading="lazy"
-        />
-      </div>
-    ))}
-     </div>
+    <div className={`related-memorial-grid ${category === 'bronze-plaques' ? 'bronze-plaques-gallery' : ''} ${selectedImage !== null ? 'image-selected' : ''}`}>
+
+      {categoryImages.map((image, index) => (
+        <button
+          type="button"
+          className={`memorial-gallery-image ${selectedImage === index ? 'active-image' : ''}`}
+          key={image}
+          onClick={() => {
+            if (category !== 'bronze-plaques') {
+              setSelectedImage(selectedImage === index ? null : index);
+            }
+          }}
+        >
+          <img
+            src={image}
+            alt={`${memorial.title} design ${index + 1}`}
+            loading="lazy"
+            onError={(e) => {
+              const img = e.currentTarget;
+
+              if (!img.dataset.pngAttempted) {
+                img.dataset.pngAttempted = 'true';
+                img.src = img.src.replace('.jpg', '.png');
+              } else {
+                img.closest('.memorial-gallery-image').style.display = 'none';
+              }
+            }}
+          />
+        </button>
+      ))}
+
+    </div>
 
     <MotionLink to="/gallery">View Complete Gallery</MotionLink>
-    </section>
+
+  </section>
+
+)}
       </div>
 
     </div>

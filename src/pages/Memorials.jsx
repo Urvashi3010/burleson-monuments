@@ -3,26 +3,26 @@ import MemorialSidebar from '../components/MemorialSidebar';
 import { MotionLink } from '../components/Motion';
 
 function Memorials() {
-  const categories = [
-    {
-  title: 'Upright Monuments',
-  description: 'Traditional monuments crafted with elegance and care.',
-  image: '/images/image_029f3854ea.png',
-  link: '/memorials/single-monuments'
-},
-{
-  title: 'Memorial Markers',
-  description: 'Beautiful markers to preserve precious memories.',
-  image: '/images/image_0741e3eea9.jpg',
-  link: '/memorials/single-markers-granite'
-},
-{
-  title: 'Custom Memorials',
-  description: 'Personalized memorials designed to honor unique lives.',
-  image: '/images/image_1224a6883e.jpg',
-  link: '/memorials/premium-monuments'
-}
-  ];
+ const categories = [
+  {
+    title: 'Upright Monuments',
+    description: 'Traditional monuments crafted with elegance and care.',
+    image: `${import.meta.env.BASE_URL}images/memorials/single-monuments/single-monuments-16.jpg`,
+    link: '/memorials/single-monuments',
+  },
+  {
+    title: 'Memorial Markers',
+    description: 'Beautiful markers to preserve precious memories.',
+    image: `${import.meta.env.BASE_URL}images/memorials/single-markers-granite/single-markers-granite-21.jpg`,
+    link: '/memorials/single-markers-granite',
+  },
+  {
+    title: 'Custom Memorials',
+    description: 'Personalized memorials designed to honor unique lives.',
+    image: `${import.meta.env.BASE_URL}images/memorials/premium-monuments/premium-monuments-03.jpg`,
+    link: '/memorials/premium-monuments',
+  },
+];
 
   return (
     <main>
