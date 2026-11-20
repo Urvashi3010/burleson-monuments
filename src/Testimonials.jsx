@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { MotionLink } from './components/Motion';
 
 const testimonials = [
   {
@@ -53,7 +53,7 @@ function Testimonials() {
           Have a question or a specific memorial in mind?
           We would be happy to hear from you.
         </p>
-        <Link to="/contact">Get in Touch</Link>
+        <MotionLink to="/contact">Get in Touch</MotionLink>
       </section>
     </main>
   );

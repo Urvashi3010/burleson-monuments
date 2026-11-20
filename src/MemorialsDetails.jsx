@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import MemorialSidebar from './components/MemorialSidebar';
+import { MotionLink } from './components/Motion';
 import galleryImages from './galleryImages';
 
 const memorialData = {
@@ -193,11 +194,11 @@ function MemorialsDetails() {
                 ))}
             </ul>
 
-            <Link to={`/contact?memorial=${encodeURIComponent(memorial.title)}`}>
+            <MotionLink to={`/contact?memorial=${encodeURIComponent(memorial.title)}`}>
             Request Information
-            </Link>
+            </MotionLink>
 
-            <Link to="/memorials">Back to All Memorials</Link>
+            <MotionLink to="/memorials">Back to All Memorials</MotionLink>
          </div>
         </section>
 
@@ -221,7 +222,7 @@ function MemorialsDetails() {
     ))}
      </div>
 
-    <Link to="/gallery">View Complete Gallery</Link>
+    <MotionLink to="/gallery">View Complete Gallery</MotionLink>
     </section>
       </div>
 

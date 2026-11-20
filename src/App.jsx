@@ -1,9 +1,11 @@
+import { AnimatePresence } from 'framer-motion';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
+import { PageMotion } from './components/Motion';
 
 import Home from './pages/Home';
 import Memorials from './pages/Memorials';
@@ -37,25 +39,35 @@ function ScrollToTop() {
   return null;
 }
 
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <PageMotion key={location.pathname} locationKey={location.pathname}>
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/memorials" element={<Memorials />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/memorials/:category" element={<MemorialsDetails />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/testimonials" element={<Testimonials />} />
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </PageMotion>
+    </AnimatePresence>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter basename="/burleson-monuments">
       <ScrollToTop />
       <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/memorials" element={<Memorials />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/memorials/:category" element={<MemorialsDetails />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/testimonials" element={<Testimonials />} />
-
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-
+      <AnimatedRoutes />
       <BackToTop />
       <Footer />
     </BrowserRouter>

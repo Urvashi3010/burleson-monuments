@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import MemorialSidebar from '../components/MemorialSidebar';
+import { MotionLink } from '../components/Motion';
 
 function Memorials() {
   const categories = [
@@ -52,9 +53,9 @@ function Memorials() {
 
                 <p>{item.description}</p>
 
-                <Link to={item.link} className="memorial-view-link">
+                <MotionLink to={item.link} className="memorial-view-link">
                   Explore Collection →
-                </Link>
+                </MotionLink>
               </div>
             ))}
           </div>
@@ -64,7 +65,7 @@ function Memorials() {
       <section className="memorial-cta">
         <h2>Need Help Choosing a Memorial?</h2>
         <p>Our team is here to help you find the right design.</p>
-        <Link to="/contact">Contact Our Team</Link>
+        <MotionLink to="/contact">Contact Our Team</MotionLink>
       </section>
     </main>
   );

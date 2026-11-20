@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { MotionLink } from './components/Motion';
 
 function FAQ() {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -99,9 +99,9 @@ function FAQ() {
           We are here to help you find the right way to honor a loved one.
         </p>
 
-        <Link to="/contact">
+        <MotionLink to="/contact">
           Contact Our Team
-        </Link>
+        </MotionLink>
       </section>
 
     </main>

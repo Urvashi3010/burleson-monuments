@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { MotionLink } from '../components/Motion';
 
 function About() {
   return (
@@ -80,8 +80,8 @@ function About() {
             for more information.
           </p>
 
-          <Link to="/memorials">Explore Memorials</Link>
-          <Link to="/contact">Contact Us</Link>
+          <MotionLink to="/memorials">Explore Memorials</MotionLink>
+          <MotionLink to="/contact">Contact Us</MotionLink>
         </div>
 
       </section>

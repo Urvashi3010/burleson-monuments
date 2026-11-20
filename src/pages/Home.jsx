@@ -1,5 +1,12 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import {
+  MotionLink,
+  Parallax,
+  ParticleField,
+  Reveal,
+  WordReveal,
+} from '../components/Motion';
 
 function Home() {
   return (
@@ -7,16 +14,16 @@ function Home() {
       <section className="hero">
         <div className="hero-overlay"></div>
         <div className="hero-black-shimmer" aria-hidden="true"></div>
-        <div className="hero-sparkles" aria-hidden="true"></div>
+        <ParticleField />
 
         <div className="hero-content">
           <p className="hero-subtitle">
             CRAFTING MEMORIES SINCE 1970
           </p>
 
-          <h1>
-            Honoring Memories.<br />
-            <span>Creating Legacies.</span>
+          <h1 aria-label="Honoring Memories. Creating Legacies.">
+            <WordReveal text="Honoring Memories." /><br />
+            <span><WordReveal text="Creating Legacies." /></span>
           </h1>
 
           <p className="hero-description">
@@ -25,14 +32,14 @@ function Home() {
           </p>
 
           <div className="hero-buttons">
-          <Link to="/memorials" className="btn-primary">
-            Explore Memorials <ArrowRight size={17} />
-          </Link>
+            <MotionLink to="/memorials" className="btn-primary">
+              Explore Memorials <ArrowRight size={17} />
+            </MotionLink>
 
-          <Link to="/contact" className="btn-secondary">
-            Speak With Our Team
-          </Link>
-        </div>
+            <MotionLink to="/contact" className="btn-secondary">
+              Speak With Our Team
+            </MotionLink>
+          </div>
         </div>
 
         <div className="hero-bottom">
@@ -45,11 +52,11 @@ function Home() {
 <section className="categories">
   <div className="section-heading">
     <span>OUR COLLECTION</span>
-    <h2>Explore Our Memorials</h2>
+    <h2><WordReveal text="Explore Our Memorials" /></h2>
     <p>Thoughtfully crafted memorials to honor a life and preserve memories.</p>
   </div>
 
-  <div className="category-card">
+  <Reveal className="category-card" delay={0}>
   <Link to="/memorials/single-monuments">
     <div className="category-image">
       <img src="/images/image_029f3854ea.png" alt="Upright Monuments" />
@@ -57,12 +64,12 @@ function Home() {
     <h3>Upright Monuments</h3>
   </Link>
   <p>Beautifully crafted monuments to honor loved ones.</p>
-  <Link className="category-card-details" to="/memorials/single-monuments">
+  <MotionLink className="category-card-details" to="/memorials/single-monuments">
     Explore Details <ArrowRight size={15} />
-  </Link>
-</div>
+  </MotionLink>
+</Reveal>
 
-  <div className="category-card">
+  <Reveal className="category-card" delay={0.08}>
   <Link to="/memorials/single-markers-granite">
     <div className="category-image">
       <img src="/images/image_0741e3eea9.jpg" alt="Memorial Markers" />
@@ -70,12 +77,12 @@ function Home() {
     <h3>Memorial Markers</h3>
   </Link>
   <p>Elegant designs created to preserve precious memories.</p>
-  <Link className="category-card-details" to="/memorials/single-markers-granite">
+  <MotionLink className="category-card-details" to="/memorials/single-markers-granite">
     Explore Details <ArrowRight size={15} />
-  </Link>
-</div>
+  </MotionLink>
+</Reveal>
 
-   <div className="category-card">
+   <Reveal className="category-card" delay={0.16}>
   <Link to="/memorials/premium-monuments">
     <div className="category-image">
       <img src="/images/image_1221872f9f.jpg" alt="Custom Memorials" />
@@ -83,16 +90,17 @@ function Home() {
     <h3>Custom Memorials</h3>
   </Link>
   <p>Personalized memorials designed with care and respect.</p>
-  <Link className="category-card-details" to="/memorials/premium-monuments">
+  <MotionLink className="category-card-details" to="/memorials/premium-monuments">
     Explore Details <ArrowRight size={15} />
-  </Link>
-</div>
+  </MotionLink>
+</Reveal>
 </section>
 
 {/* About Section */}
 <section className="about">
-  <div className="about-visual" role="img" aria-label="A soft illustration of a flowering plant in a pot">
-    <svg className="about-flower" viewBox="0 0 320 320" aria-hidden="true" focusable="false">
+  <Reveal className="about-visual" role="img" aria-label="A soft illustration of a flowering plant in a pot">
+    <Parallax>
+      <svg className="about-flower" viewBox="0 0 320 320" aria-hidden="true" focusable="false">
       <circle className="about-flower-halo" cx="160" cy="148" r="112" />
       <path className="about-flower-stem" d="M160 216c0-36-1-68 0-108" />
       <path className="about-flower-stem" d="M160 180c-16-5-27-16-31-31m31 10c17-6 28-17 31-33" />
@@ -109,17 +117,18 @@ function Home() {
       <path className="about-flower-pot" d="M113 220h94l-10 69h-74z" />
       <path className="about-flower-pot-rim" d="M103 211h114v14H103z" />
       <path className="about-flower-pot-detail" d="M137 239h46m-43 12h40" />
-    </svg>
+      </svg>
+    </Parallax>
     <div className="about-visual-caption" aria-hidden="true">
       <span>QUALITY CRAFTSMANSHIP</span>
       <span>BUILT TO LAST</span>
     </div>
-  </div>
+  </Reveal>
 
-  <div className="about-content">
+  <Reveal className="about-content" delay={0.1}>
     <span>ABOUT BURLESON MONUMENTS</span>
 
-    <h2>Honoring Memories That Last Forever</h2>
+    <h2><WordReveal text="Honoring Memories That Last Forever" /></h2>
 
     <p>
       Every life tells a unique story. We believe a memorial should
@@ -131,44 +140,44 @@ function Home() {
       preserve memories for generations to come.
     </p>
 
-      <Link to="/about" className="about-btn">
+      <MotionLink to="/about" className="about-btn">
         Learn More
-      </Link>
-  </div>
+      </MotionLink>
+  </Reveal>
 </section>
 
 <section className="testimonials">
   <div className="section-heading">
     <span>OUR COMMITMENT</span>
-    <h2>Care Behind Every Memorial</h2>
+    <h2><WordReveal text="Care Behind Every Memorial" /></h2>
     <p>Every detail matters when creating a lasting tribute.</p>
   </div>
 
   <div className="testimonial-grid">
-    <div className="testimonial-card">
+    <Reveal className="testimonial-card" delay={0}>
       <h3>Personalized Attention</h3>
       <p>Every family's needs and wishes deserve thoughtful attention.</p>
-    </div>
+    </Reveal>
 
-    <div className="testimonial-card">
+    <Reveal className="testimonial-card" delay={0.08}>
       <h3>Quality Craftsmanship</h3>
       <p>Memorial designs created with care and attention to detail.</p>
-    </div>
+    </Reveal>
 
-    <div className="testimonial-card">
+    <Reveal className="testimonial-card" delay={0.16}>
       <h3>Lasting Remembrance</h3>
       <p>Meaningful tributes that help preserve precious memories.</p>
-    </div>
+    </Reveal>
   </div>
 
-  <Link to="/testimonials">Learn More</Link>
+  <MotionLink to="/testimonials">Learn More</MotionLink>
 </section>
 
 {/* Contact Section */}
 <section className="contact">
   <div className="contact-info">
     <span>GET IN TOUCH</span>
-    <h2>We're Here to Help You</h2>
+    <h2><WordReveal text="We're Here to Help You" /></h2>
     <p>
       Have questions or need assistance choosing a memorial?
       Get in touch with our team.

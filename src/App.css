@@ -46,10 +46,6 @@ h3 {
   font-weight: 600;
 }
 
-main :is(h1, h2, h3, p, li) {
-  animation: float-gentle-up 6.2s ease-in-out infinite;
-}
-
 ::selection {
   background: rgba(219, 112, 147, 0.35);
   color: var(--color-charcoal);
@@ -62,6 +58,66 @@ textarea:focus-visible {
   outline: 3px solid var(--color-pale-violet-red);
   outline-offset: 3px;
   box-shadow: 0 0 0 5px rgba(219, 112, 147, 0.14);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.word-reveal__word {
+  display: inline-block;
+}
+
+.page-motion {
+  width: 100%;
+}
+
+[data-motion="pending"] {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-motion="visible"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+main :is(.memorial-item, .gallery-item, .related-memorial-card, .faq-item):nth-child(3n + 2)[data-motion="pending"] {
+  transition-delay: 80ms;
+}
+
+main :is(.memorial-item, .gallery-item, .related-memorial-card, .faq-item):nth-child(3n + 3)[data-motion="pending"] {
+  transition-delay: 160ms;
+}
+
+.motion-link__burst {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+}
+
+.motion-link {
+  position: relative;
+}
+
+.motion-link__particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-pale-violet-red);
+  box-shadow: 0 0 6px rgba(219, 112, 147, 0.48);
 }
 
 /* Shared navigation */
@@ -79,11 +135,39 @@ textarea:focus-visible {
   padding: 10px 4%;
   border: 1px solid rgba(219, 112, 147, 0.25);
   border-radius: 18px;
-  /* background: var(--color-charcoal); */
-  background: rgba(20, 20, 20, 0.78);
+
+  background: var(--color-charcoal);
   box-shadow: 0 8px 28px rgba(36, 37, 36, 0.18);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+/* transition: all 0.45s ease; */
+  /* transition: background 0.35s ease,
+              backdrop-filter 0.35s ease,
+              box-shadow 0.35s ease; */
+  transition: background 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+/* Navbar glass effect on scroll */
+.navbar.scrolled {
+  background: rgba(20, 20, 20, 0.12) !important;
+
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  box-shadow:
+    0 0 8px rgba(255, 255, 255, 0.12),
+    0 0 18px rgba(255, 255, 255, 0.08);
+
+  transition: all 0.4s ease;
+}
+
+/* Active navigation link glow */
+.nav-links a.active-link {
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.45),
+    0 0 16px rgba(255, 255, 255, 0.25);
+
+  transition: text-shadow 0.3s ease;
 }
 
 .navbar-logo {
@@ -257,20 +341,26 @@ textarea:focus-visible {
   pointer-events: none;
 }
 
-.hero-sparkles {
+.hero-particle-field {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   inset: 0;
-  background-image:
-    radial-gradient(circle at 18% 24%, rgba(219, 112, 147, 0.42) 0 1px, transparent 1.8px),
-    radial-gradient(circle at 44% 15%, rgba(247, 231, 206, 0.85) 0 1.3px, transparent 2px),
-    radial-gradient(circle at 69% 28%, rgba(219, 112, 147, 0.3) 0 1px, transparent 1.8px),
-    radial-gradient(circle at 88% 18%, rgba(247, 231, 206, 0.75) 0 1.2px, transparent 2px),
-    radial-gradient(circle at 58% 76%, rgba(219, 112, 147, 0.28) 0 1px, transparent 1.8px),
-    radial-gradient(circle at 25% 78%, rgba(247, 231, 206, 0.62) 0 1px, transparent 1.8px);
-  opacity: 0.38;
-  animation: sparkle-twinkle 6s ease-in-out infinite alternate;
   pointer-events: none;
+}
+
+.hero-particle-track {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.hero-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(18, 18, 18, 0.78);
+  box-shadow: 0 0 6px rgba(18, 18, 18, 0.2);
 }
 
 .hero-overlay {
@@ -282,7 +372,7 @@ textarea:focus-visible {
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   width: min(62%, 830px);
   max-width: 830px;
   padding: 0;
@@ -295,7 +385,7 @@ textarea:focus-visible {
   color: var(--color-charcoal);
   font-size: 0.72rem;
   letter-spacing: 0.24em;
-  animation: float-gentle-left 5.8s ease-in-out 200ms infinite;
+  animation: settle-in 650ms 80ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 .hero-content h1 {
@@ -304,9 +394,7 @@ textarea:focus-visible {
   font-size: clamp(2.8rem, 6vw, 5rem);
   letter-spacing: -0.045em;
   line-height: 1.08;
-  animation:
-    settle-in 900ms 100ms cubic-bezier(0.2, 0.7, 0.2, 1) both,
-    float-heading 5s ease-in-out 800ms infinite;
+  animation: settle-in 900ms 100ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 .hero-content h1 span {
@@ -319,7 +407,7 @@ textarea:focus-visible {
   color: var(--color-muted);
   font-size: 1.02rem;
   line-height: 1.85;
-  animation: float-gentle-right 7s ease-in-out 300ms infinite;
+  animation: float-in-right 800ms 180ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 .hero-buttons {
@@ -355,6 +443,15 @@ textarea:focus-visible {
   box-shadow: 0 0 0 3px rgba(219, 112, 147, 0.22), 0 12px 28px rgba(36, 37, 36, 0.18);
 }
 
+.hero-buttons a:hover,
+.about-btn:hover,
+.memorial-detail-content a:hover,
+.related-memorials > a:hover,
+.memorial-cta a:hover,
+.memorial-item .memorial-view-link:hover {
+  transform: translate3d(var(--magnetic-x, 0px), calc(var(--magnetic-y, 0px) - 3px), 0);
+}
+
 .btn-primary {
   border: 1px solid var(--color-champagne-gold);
   background: var(--color-champagne-gold);
@@ -380,7 +477,7 @@ textarea:focus-visible {
 
 .hero-bottom {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   right: max(7%, calc((100% - 1280px) / 2));
   bottom: 1.5rem;
   left: max(7%, calc((100% - 1280px) / 2));
@@ -592,6 +689,12 @@ textarea:focus-visible {
   animation: flower-sway 5s ease-in-out infinite alternate;
 }
 
+.about-parallax {
+  display: grid;
+  width: 100%;
+  place-items: center;
+}
+
 .about-flower-halo {
   fill: rgba(109, 127, 137, 0.06);
   stroke: rgba(109, 127, 137, 0.2);
@@ -759,7 +862,7 @@ textarea:focus-visible {
 }
 
 .testimonials > a:hover {
-  transform: translateY(-2px);
+  transform: translate3d(var(--magnetic-x, 0px), calc(var(--magnetic-y, 0px) - 2px), 0);
   border-color: var(--color-pale-violet-red);
   background: var(--color-pale-violet-red);
   color: var(--color-charcoal);
@@ -920,9 +1023,6 @@ textarea:focus-visible {
   font-size: clamp(2.6rem, 6vw, 4.7rem);
   letter-spacing: -0.045em;
   line-height: 1.08;
-  animation:
-    settle-in 650ms 80ms cubic-bezier(0.2, 0.7, 0.2, 1) both,
-    float-heading 5s ease-in-out 700ms infinite;
 }
 
 .page-banner p {
@@ -931,9 +1031,6 @@ textarea:focus-visible {
   max-width: 38rem;
   color: var(--color-muted);
   line-height: 1.8;
-  animation:
-    float-in-right 800ms 140ms cubic-bezier(0.2, 0.7, 0.2, 1) both,
-    float-gentle-right 7s ease-in-out 1s infinite;
 }
 
 .about-page-content {
@@ -1965,26 +2062,6 @@ button:not(:disabled):is(:hover, :focus-visible, :active),
   }
 }
 
-@keyframes float-heading {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -9px, 0); }
-}
-
-@keyframes float-gentle-up {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -6px, 0); }
-}
-
-@keyframes float-gentle-left {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(-4px, -3px, 0); }
-}
-
-@keyframes float-gentle-right {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(4px, -3px, 0); }
-}
-
 @keyframes flower-sway {
   from { transform: rotate(-1.5deg); }
   to { transform: rotate(1.5deg); }
@@ -2000,22 +2077,6 @@ button:not(:disabled):is(:hover, :focus-visible, :active),
   to { opacity: 1; scale: 1; }
 }
 
-@keyframes scroll-reveal {
-  from {
-    opacity: 0;
-    translate: 0 64px;
-  }
-  to {
-    opacity: 1;
-    translate: 0 0;
-  }
-}
-
-@keyframes image-fade-in {
-  from { opacity: 0.25; }
-  to { opacity: 1; }
-}
-
 @keyframes float-in-right {
   from {
     opacity: 0;
@@ -2024,150 +2085,6 @@ button:not(:disabled):is(:hover, :focus-visible, :active),
   to {
     opacity: 1;
     translate: 0 0;
-  }
-}
-
-@supports (animation-timeline: view()) {
-  .categories,
-  .about,
-  .testimonials,
-  .contact,
-  .testimonials-content,
-  .testimonials-contact,
-  .gallery-section,
-  .faq-section,
-  .faq-cta {
-    animation: scroll-reveal linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 55%;
-  }
-
-  .hero ~ .categories .section-heading,
-  .category-card,
-  .hero ~ .about .about-visual,
-  .hero ~ .about .about-content,
-  .about-visual,
-  .about-content,
-  .hero ~ .testimonials .section-heading,
-  .testimonial-card,
-  .hero ~ .contact .contact-info,
-  .hero ~ .contact .contact-form,
-  .contact-info,
-  .contact-form,
-  .about-page-content > *,
-  .contact-page > *,
-  .memorial-item,
-  .gallery-item,
-  .faq-item,
-  .memorial-detail-content > *,
-  .related-memorial-card {
-    animation: scroll-reveal linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 70%;
-  }
-
-  .category-image img,
-  .memorial-item img,
-  .gallery-item img,
-  .related-memorial-card img {
-    animation: image-fade-in linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 58%;
-  }
-
-  .section-heading h2,
-  .section-heading p,
-  .about-content > *,
-  .contact-info > *,
-  .about-page .about-content h2,
-  .about-page .about-content p,
-  .about-page .about-content li,
-  .contact-page > div h2,
-  .contact-page > div p,
-  .contact-page form h3,
-  .memorials-content > h2,
-  .memorials-content > p,
-  .category-card h3,
-  .category-card p,
-  .testimonial-card h3,
-  .testimonial-card p,
-  .memorial-item h3,
-  .memorial-item p,
-  .memorial-detail-content h2,
-  .memorial-detail-content h3,
-  .memorial-detail-content p,
-  .memorial-detail-content li,
-  .testimonials-content > h2,
-  .testimonials-content > p,
-  .testimonials-contact h2,
-  .testimonials-contact p,
-  .faq-section .section-heading h2,
-  .faq-section .section-heading p,
-  .faq-item button,
-  .faq-item p,
-  .faq-cta h2,
-  .faq-cta p,
-  .gallery-section > h2,
-  .related-memorials h2,
-  .related-memorials > p {
-    animation: float-gentle-up 6.2s ease-in-out infinite;
-  }
-
-  .about-page .about-content > div:nth-child(odd) h2,
-  .about-page .about-content > div:nth-child(odd) p,
-  .contact-page > div h2,
-  .contact-page > div p,
-  .faq-item button {
-    animation-name: float-gentle-left;
-  }
-
-  .testimonials-content > p,
-  .testimonials-contact h2,
-  .testimonials-contact p,
-  .memorial-detail-content li,
-  .related-memorials > p {
-    animation-name: float-gentle-right;
-  }
-
-  .category-card:nth-child(3) h3,
-  .category-card:nth-child(3) p,
-  .testimonial-card:nth-child(3) h3,
-  .testimonial-card:nth-child(3) p {
-    animation-name: float-gentle-left;
-  }
-
-  .category-card:nth-child(4) h3,
-  .category-card:nth-child(4) p,
-  .testimonial-card:nth-child(2) h3,
-  .testimonial-card:nth-child(2) p {
-    animation-name: float-gentle-right;
-  }
-
-  .hero ~ .categories .section-heading,
-  .hero ~ .testimonials .section-heading {
-    animation-range: entry 0% entry 78%;
-  }
-
-  .category-card:nth-child(2),
-  .testimonial-card:nth-child(2) {
-    animation-range: entry 8% entry 78%;
-  }
-
-  .category-card:nth-child(3),
-  .testimonial-card:nth-child(3) {
-    animation-range: entry 15% entry 85%;
-  }
-
-  .category-card:nth-child(4) {
-    animation-range: entry 22% entry 92%;
-  }
-
-  .memorial-item:nth-child(3n + 2) {
-    animation-range: entry 8% entry 78%;
-  }
-
-  .memorial-item:nth-child(3n + 3) {
-    animation-range: entry 15% entry 85%;
   }
 }
 
@@ -2450,3 +2367,17 @@ button:not(:disabled):is(:hover, :focus-visible, :active),
   }
 }
 
+/* Navigation text color on scroll */
+.navbar.scrolled .nav-links a {
+  background: transparent !important;
+  color: #000000 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Active navigation text */
+.navbar.scrolled .nav-links a.active-link {
+  color: #000000 !important;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+  background: transparent !important;
+}
