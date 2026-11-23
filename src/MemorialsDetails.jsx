@@ -219,7 +219,47 @@ function MemorialsDetails() {
          </div>
         </section>
 
- {category === 'flower-vases' ? (
+{category === 'granite-colors' ? (
+
+  <section className="granite-samples-page">
+
+    <h2>Available Granite Colors</h2>
+
+    <div className="granite-samples-grid">
+
+      {[
+        'Georgia Gray',
+        'Bahama Blue',
+        'Sunset Red',
+        'Jet Black',
+        'Indian Red',
+        'Salisbury Pink',
+        'Flash Black',
+        'Mahogany',
+        'Morning Rose',
+      ].map((name, index) => (
+
+        <div className="granite-sample-card" key={name}>
+
+          <img
+            src={`${import.meta.env.BASE_URL}images/memorials/flower-vases/flower-vases-${String(index + 3).padStart(2, '0')}.jpg`}
+            alt={name}
+            onError={(e) => {
+              e.currentTarget.closest('.granite-sample-card').style.display = 'none';
+            }}
+          />
+
+          <h3>{name}</h3>
+
+        </div>
+
+      ))}
+
+    </div>
+
+  </section>
+
+) : category === 'flower-vases' ? (
 
   <section className="flower-vases-page">
 
