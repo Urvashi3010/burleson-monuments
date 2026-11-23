@@ -1,3 +1,4 @@
+import MemorialSidebar from '../components/MemorialSidebar';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import {
@@ -9,6 +10,72 @@ import {
 
 import FanCardCarousel from '../components/FanCardCarousel';
 
+const homeProducts = [
+  {
+    title: 'Single Markers',
+    subtitle: '(Granite)',
+    slug: 'single-markers-granite',
+    image: 'single-markers-granite-01.jpg',
+    folder: 'single-markers-granite',
+  },
+  {
+    title: 'Companion Markers',
+    subtitle: '(Granite)',
+    slug: 'companion-markers-granite',
+    image: 'companion-markers-granite-01.jpg',
+    folder: 'companion-markers-granite',
+  },
+  {
+    title: 'Single Markers',
+    subtitle: '(Bronze)',
+    slug: 'single-markers-bronze',
+    image: 'single-markers-bronze-01.jpg',
+    folder: 'single-markers-bronze',
+  },
+  {
+    title: 'Companion Markers',
+    subtitle: '(Bronze)',
+    slug: 'companion-markers-bronze',
+    image: 'companion-markers-bronze-01.jpg',
+    folder: 'companion-markers-bronze',
+  },
+  {
+    title: 'Single Monuments',
+    slug: 'single-monuments',
+    image: 'single-monuments-01.jpg',
+    folder: 'single-monuments',
+  },
+  {
+    title: 'Companion Monuments',
+    slug: 'companion-monuments',
+    image: 'companion-monuments-01.jpg',
+    folder: 'companion-monuments',
+  },
+  {
+    title: 'Premium Monuments',
+    slug: 'premium-monuments',
+    image: 'premium-monuments-01.jpg',
+    folder: 'premium-monuments',
+  },
+  {
+    title: 'Cremation Memorials',
+    slug: 'cremation-memorials',
+    image: 'cremation-memorials-01.jpg',
+    folder: 'cremation-memorials',
+  },
+  {
+    title: 'Memorial Photos',
+    slug: 'memorial-photos',
+    image: 'memorial-photos-01.jpg',
+    folder: 'memorial-photos',
+  },
+  {
+    title: 'Memorial Benches',
+    slug: 'memorial-benches',
+    image: 'memorial-benches-01.jpg',
+    folder: 'memorial-benches',
+  },
+];
 function Home() {
   return (
     <main>
@@ -49,7 +116,107 @@ function Home() {
           <span>PERSONALIZED OPTIONS</span>
         </div>
       </section>
-      {/* Memorial Categories */}
+
+{/* Original Burleson Home Page Content */}
+<section className="original-home-content">
+
+  <div className="original-home-layout">
+
+    {/* LEFT SIDEBAR */}
+    <aside className="original-home-sidebar">
+
+      <div className="original-sidebar-contact">
+        <h3>Contact Us</h3>
+
+        <p>817-295-2662</p>
+        <p>1-800-863-2662</p>
+
+        <Link to="/contact">Contact Burleson Monuments</Link>
+      </div>
+
+      <MemorialSidebar />
+
+    </aside>
+
+<div className="original-home-main">
+
+  <h3 className="original-home-intro-text">
+  Burleson Monuments offers beautiful designs, quality materials
+  and workmanship at reasonable prices.
+</h3>
+  {/* PRODUCT CATEGORIES */}
+  <div className="original-home-products">
+
+    {homeProducts.map((product) => (
+
+      <Link
+        to={`/memorials/${product.slug}`}
+        className="original-home-product"
+        key={product.slug}
+      >
+
+        <div className="original-product-image">
+
+          <img
+            src={`${import.meta.env.BASE_URL}images/memorials/${product.folder}/${product.image}`}
+            alt={product.title}
+            loading="lazy"
+            onError={(e) => {
+  e.currentTarget.closest('.original-home-product').style.display = 'none';
+}}
+          />
+
+        </div>
+
+        <h3>{product.title}</h3>
+
+        {product.subtitle && (
+          <span>{product.subtitle}</span>
+        )}
+
+      </Link>
+
+    ))}
+
+  </div>
+
+</div>
+
+  </div>
+
+
+  {/* BOTTOM INFORMATION */}
+  <div className="original-home-bottom">
+
+    <p>
+      The memorial consultants at Burleson Monuments understand
+      that ordering a memorial can be a stressful experience.
+      We make every effort to provide information and design
+      assistance without sales pressure.
+    </p>
+
+    <p>
+      Most of our memorial consultants are second or third
+      generation in the monument business. We are pleased to
+      offer our experience to help you design a beautiful
+      memorial for your loved one.
+    </p>
+
+    <h3>OUR PRODUCTS INCLUDE:</h3>
+
+    <p>
+      Cemetery Headstones, Grave Markers, Cemetery Monuments,
+      Memorial Benches, Memorial Portraits, Flower Vases,
+      Slant Headstone Markers, Bevel Markers, Bronze Headstones,
+      Bronze Plaques, Pet Memorials and Laser Etching.
+    </p>
+
+    <Link to="/contact">Contact Burleson Monuments</Link>
+
+  </div>
+
+</section>
+
 {/* Memorial Categories */}
 <section className="categories">
   <div className="section-heading">

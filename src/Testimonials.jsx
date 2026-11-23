@@ -1,4 +1,5 @@
 import { MotionLink } from './components/Motion';
+import MemorialSidebar from './components/MemorialSidebar';
 
 const testimonials = [
   {
@@ -21,6 +22,7 @@ const testimonials = [
 function Testimonials() {
   return (
     <main className="testimonials-page">
+
       <section className="page-banner testimonials-hero">
         <p>OUR COMMITMENT</p>
         <h1>Every Memory Deserves to Be Honored</h1>
@@ -30,31 +32,46 @@ function Testimonials() {
         </p>
       </section>
 
-      <section className="testimonials-content">
-        <h2>What Matters to Us</h2>
-        <p>
-          We understand the importance of creating a lasting tribute.
-          Our approach focuses on three things:
-        </p>
+      <div className="page-with-sidebar">
 
-        <div className="testimonial-grid">
-          {testimonials.map((item, index) => (
-            <article className="testimonial-card" key={index}>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </article>
-          ))}
+        <aside className="page-sidebar">
+          <MemorialSidebar />
+        </aside>
+
+        <div className="page-main-content">
+
+          <section className="testimonials-content">
+
+            <h2>What Matters to Us</h2>
+
+            <p>
+              We understand the importance of creating a lasting tribute.
+              Our approach focuses on three things:
+            </p>
+
+            <div className="testimonial-grid">
+              {testimonials.map((item, index) => (
+                <article className="testimonial-card" key={index}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
+            </div>
+
+          </section>
+
+          <section className="testimonials-contact">
+            <h2>Let Us Help You Create a Lasting Tribute</h2>
+            <p>
+              Have a question or a specific memorial in mind?
+              We would be happy to hear from you.
+            </p>
+            <MotionLink to="/contact">Get in Touch</MotionLink>
+          </section>
+
         </div>
-      </section>
+      </div>
 
-      <section className="testimonials-contact">
-        <h2>Let Us Help You Create a Lasting Tribute</h2>
-        <p>
-          Have a question or a specific memorial in mind?
-          We would be happy to hear from you.
-        </p>
-        <MotionLink to="/contact">Get in Touch</MotionLink>
-      </section>
     </main>
   );
 }

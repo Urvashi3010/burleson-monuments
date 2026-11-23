@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MotionLink } from './components/Motion';
+import MemorialSidebar from './components/MemorialSidebar';
 
 function FAQ() {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -55,54 +56,65 @@ function FAQ() {
         <p>Find answers to common questions about our memorials and services.</p>
       </section>
 
-      <section className="faq-section">
+      <div className="page-with-sidebar">
 
-        <div className="section-heading">
-          <span>WE ARE HERE TO HELP</span>
-          <h2>How Can We Help You?</h2>
-          <p>
-            Explore answers to common questions about memorial designs,
-            personalization, and getting started.
-          </p>
-        </div>
+        <aside className="page-sidebar">
+          <MemorialSidebar />
+        </aside>
 
-        <div className="faq-list">
-          {faqs.map((faq, index) => (
-            <div className="faq-item" key={index}>
+        <div className="page-main-content">
 
-              <button
-                className="faq-question"
-                onClick={() =>
-                  setActiveIndex(activeIndex === index ? null : index)
-                }
-                aria-expanded={activeIndex === index}
-              >
-                <span>{faq.question}</span>
-                <span>{activeIndex === index ? '−' : '+'}</span>
-              </button>
+          <section className="faq-section">
 
-              {activeIndex === index && (
-                <div className="faq-answer">
-                  <p>{faq.answer}</p>
-                </div>
-              )}
-
+            <div className="section-heading">
+              <span>WE ARE HERE TO HELP</span>
+              <h2>How Can We Help You?</h2>
+              <p>
+                Explore answers to common questions about memorial designs,
+                personalization, and getting started.
+              </p>
             </div>
-          ))}
+
+            <div className="faq-list">
+              {faqs.map((faq, index) => (
+                <div className="faq-item" key={index}>
+
+                  <button
+                    className="faq-question"
+                    onClick={() =>
+                      setActiveIndex(activeIndex === index ? null : index)
+                    }
+                    aria-expanded={activeIndex === index}
+                  >
+                    <span>{faq.question}</span>
+                    <span>{activeIndex === index ? '−' : '+'}</span>
+                  </button>
+
+                  {activeIndex === index && (
+                    <div className="faq-answer">
+                      <p>{faq.answer}</p>
+                    </div>
+                  )}
+
+                </div>
+              ))}
+            </div>
+
+          </section>
+
+          <section className="faq-cta">
+            <h2>Still Have Questions?</h2>
+            <p>
+              We are here to help you find the right way to honor a loved one.
+            </p>
+
+            <MotionLink to="/contact">
+              Contact Our Team
+            </MotionLink>
+          </section>
+
         </div>
-
-      </section>
-
-      <section className="faq-cta">
-        <h2>Still Have Questions?</h2>
-        <p>
-          We are here to help you find the right way to honor a loved one.
-        </p>
-
-        <MotionLink to="/contact">
-          Contact Our Team
-        </MotionLink>
-      </section>
+      </div>
 
     </main>
   );

@@ -12,11 +12,13 @@ import Memorials from './pages/Memorials';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
+import OrderingPrices from './pages/OrderingPrices';
 
 import MemorialsDetails from './MemorialsDetails';
 import FAQ from './FAQ';
 import Testimonials from './Testimonials';
 
+import MemorialSidebar from './components/MemorialSidebar';
 import './App.css';
 
 function NotFound() {
@@ -38,7 +40,6 @@ function ScrollToTop() {
 
   return null;
 }
-
 function AnimatedRoutes() {
   const location = useLocation();
 
@@ -50,18 +51,17 @@ function AnimatedRoutes() {
           <Route path="/memorials" element={<Memorials />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/ordering-prices" element={<OrderingPrices />} />
           <Route path="/memorials/:category" element={<MemorialsDetails />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/testimonials" element={<Testimonials />} />
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </PageMotion>
     </AnimatePresence>
   );
 }
-
 function App() {
   return (
     <BrowserRouter basename="/burleson-monuments">
